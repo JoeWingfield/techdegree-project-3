@@ -7,6 +7,7 @@ class Game:
     def __init__(self):
         self.win = None
         self.lives = 7
+        self.missed = 0
         self.phrases = ["joe is learning python", "macaroni macaroni", 
                         "great day to be great", "never say i cant", "twenty push ups"]
         self.active_phrase = None
@@ -39,8 +40,8 @@ class Game:
     def get_guess(self):
         guessing = True
         while guessing == True:
-            phrase = Phrase()
-            self.display_phrase = phrase.display(self.active_phrase, self.guesses)
+            phrase = Phrase(self.active_phrase)
+            self.display_phrase = phrase.display( self.guesses)
             check = phrase.check_complete(self.lives, self.display_phrase, self.active_phrase)
             if check == "win":
                 self.game_over(check)
@@ -53,6 +54,7 @@ class Game:
             
             if current_guess not in self.active_phrase:
                 self.lives -= 1
+                self.missed += 1
             
             print("You have {} out of 7 lives remaining!".format(self.lives))
             if len(current_guess) > 1:
