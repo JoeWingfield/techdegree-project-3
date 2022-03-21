@@ -1,10 +1,12 @@
 class Phrase:
     
-    def display(self, active_phrase, guesses):
+    def __init__(self, active_phrase):
         self.active_phrase = active_phrase
+    
+    def display(self, guesses):
         self.hidden_phrase = []
         blank = "_ "
-        for letter in active_phrase:
+        for letter in self.active_phrase:
             if letter in guesses:
                 self.hidden_phrase.append(letter)
             if letter not in guesses:
